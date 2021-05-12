@@ -1,0 +1,37 @@
+.title {
+  margin: 0;
+
+  font-size: 4rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.button {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  padding: 11px 20px;
+
+  background: none;
+  background: #2a5365;
+  border: 1px solid rgba(42, 83, 101, 0.4);
+  border-radius: 40px;
+  color: #fff;
+
+  cursor: pointer;
+
+  font-family: "Fira Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 16px;
+
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
