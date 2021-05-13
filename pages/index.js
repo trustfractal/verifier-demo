@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import classNames from "classnames";
+import map from "lodash/map";
+import omit from "lodash/omit";
+import capitalize from "lodash/capitalize";
+import words from "lodash/words";
 
 import styles from "../styles/Home.module.css";
 
@@ -87,7 +90,7 @@ export default function Home() {
         level: "basic+liveness",
         transaction:
           '{"hash":"0xf4822320f70b264fe1f69d4ac5a20928233b9038ad112c7903220d9888fe7ee6","chainId":3,"data":"0x6e9c9300000000000000000000000000e3749e993f0a63dd4bb163ed70e1c9965a2d2b7f000000000000000000000000a372ca5a906f7fad480c49bbc73453672d4d375d1644b46d157aa8445458309c67a07b13d48637b902f6c125a431cdb219d002fc0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000004186e5892864247453d7fbde99ee8188a54eb485623a479ce91fe37d4400cc0dcc3b6667cd291364210f37f49c96376fe85000a62fb53a807fe4735ee077e8382c1b00000000000000000000000000000000000000000000000000000000000000","from":"0xE3749E993F0A63DD4BB163ed70e1c9965A2D2b7f","gasLimit":{"type":"BigNumber","hex":"0xd23e"},"gasPrice":{"type":"BigNumber","hex":"0x3b9aca00"},"value":{"type":"BigNumber","hex":"0x00"}}',
-        valid: true,
+        valid: false,
       });
 
     const cred = await window.Fractal.requestCredential();
@@ -122,14 +125,26 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8">
-          <h1 className={styles.title}>Some site</h1>
+          <h1 className={styles.title}>Polkastarter</h1>
 
           <div className="mt-16">
             {credential ? (
               <>
                 <h2 className="text-4xl mb-8">Your credential</h2>
-                <div>{credential.level}</div>
-                <div>{credential.valid ? "Valid" : "Invalid"}</div>
+                <ol>
+                  <li className="mb-2">
+                    <b>Level</b>: {credential.level}{" "}
+                    {credential.valid ? "\u2705" : "\u274C"}
+                  </li>
+                  {map(
+                    omit(credential.claim.properties, ["liveness"]),
+                    (val, key) => (
+                      <li className="mb-2" key={key}>
+                        <b>{capitalize(words(key).join(" "))}</b>: {val}
+                      </li>
+                    )
+                  )}
+                </ol>
               </>
             ) : (
               <button
