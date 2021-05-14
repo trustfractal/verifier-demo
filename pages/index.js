@@ -37,25 +37,25 @@ export default function Home() {
         icon: "https://www.polkastarter.com/packs/media/images/logo/favicon-5c923122dec9213975049aa98a6781a4.svg",
       };
       const level = "basic+liveness";
-      const { credential: cred } = await window.Fractal.getVerificationRequest(
+      const request = await window.Fractal.getVerificationRequest(
         level,
         requester
       );
 
-      const signedNouce = await window.Fractal.getSignedNounce();
+      const signedNonce = await window.Fractal.getSignedNonce();
 
       const response = await fetch("/api/validate_credential", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify({ credential: cred, signedNouce }),
+        body: JSON.stringify({ request, signedNonce }),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        setCredential(result.credential);
+        setCredential({ ...result.request.credential, valid: result.valid });
       }
     } catch (error) {
       console.log(error);
