@@ -57,3 +57,4 @@ Fractal Wallet was created and is maintained with :heart: by [Fractal Protocol][
 
 [license]: ./LICENSE
 [fractal]: https://protocol.fractal.id/
+[next-js]: https://nextjs.org
