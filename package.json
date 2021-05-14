@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "prettier --check src/**/*.js",
+    "lint-fix": "prettier --write src/**/*.js",
     "start": "next start"
   },
   "dependencies": {
