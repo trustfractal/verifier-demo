@@ -37,9 +37,19 @@ export default function Home() {
         icon: "https://www.polkastarter.com/packs/media/images/logo/favicon-5c923122dec9213975049aa98a6781a4.svg",
       };
       const level = "basic+liveness";
+      const fields = {
+        liveness: false,
+        residential_address_country: true,
+        date_of_birth: true,
+        full_name: false,
+        identification_document_country: false,
+        identification_document_number: false,
+        identification_document_type: false,
+      };
       const request = await window.Fractal.getVerificationRequest(
         level,
-        requester
+        requester,
+        fields
       );
 
       const signedNonce = await window.Fractal.getSignedNonce();
